@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
+        /* إضافة شاشة الترحيب */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050b14;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease;
+        }
+        .pre-logo { font-family: 'Orbitron', sans-serif; color: #fff; font-size: 28px; letter-spacing: 4px; margin-bottom: 10px; }
+        .pre-text { font-family: 'Cairo', sans-serif; color: #00f0ff; font-size: 14px; letter-spacing: 2px; }
+
         :root {
             --bg-base: #050b14;
             --cyber-cyan: #00f0ff;
@@ -407,6 +425,12 @@
 </head>
 <body>
 
+    <!-- الشاشة الترحيبية -->
+    <div id="preloader">
+        <div class="pre-logo">DIOPHANTUS</div>
+        <div class="pre-text">جاري تحميل البيانات...</div>
+    </div>
+
     <div class="bg-grid"></div>
     <div class="tech-overlay"></div>
 
@@ -427,7 +451,6 @@
 
         <div class="links-container">
             
-            <!-- 1. نبذة عن المهندس -->
             <div class="link-item" onclick="openModal('about')">
                 <div class="link-icon"><i class="fas fa-brain"></i></div>
                 <div class="link-content">
@@ -437,7 +460,6 @@
                 <i class="fas fa-chevron-left link-arrow"></i>
             </div>
 
-            <!-- 2. أهم الكورسات والدورات -->
             <div class="link-item" onclick="openModal('courses')">
                 <div class="link-icon"><i class="fas fa-microchip"></i></div>
                 <div class="link-content">
@@ -447,7 +469,6 @@
                 <i class="fas fa-chevron-left link-arrow"></i>
             </div>
 
-            <!-- 3. الخبرات العملية والشركات -->
             <div class="link-item" onclick="openModal('experience')">
                 <div class="link-icon"><i class="fas fa-bolt"></i></div>
                 <div class="link-content">
@@ -457,7 +478,6 @@
                 <i class="fas fa-chevron-left link-arrow"></i>
             </div>
 
-            <!-- 4. المهارات والبرمجة واللغات -->
             <div class="link-item" onclick="openModal('skills')">
                 <div class="link-icon"><i class="fas fa-code-branch"></i></div>
                 <div class="link-content">
@@ -467,7 +487,6 @@
                 <i class="fas fa-chevron-left link-arrow"></i>
             </div>
 
-            <!-- 5. السيرة الذاتية (CV) -->
             <div class="link-item" onclick="openModal('cv')">
                 <div class="link-icon"><i class="fas fa-file-code"></i></div>
                 <div class="link-content">
@@ -479,7 +498,6 @@
 
         </div>
 
-        <!-- الأيقونات بالأسفل مدمجة بكل الروابط الفعلية -->
         <div class="social-footer">
             <a href="https://www.facebook.com/share/1JkaR6DKtw/" target="_blank" class="social-btn" title="فيسبوك (شخصي)"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.facebook.com/share/191M7msfGx/" target="_blank" class="social-btn" title="فيسبوك (الصفحة الرسمية)"><i class="fas fa-flag"></i></a>
@@ -499,7 +517,7 @@
 
     </div>
 
-    <!-- النافذة الديناميكية popup modal -->
+    <!-- النافذة الديناميكية -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOuterClick(event)">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
@@ -514,15 +532,24 @@
     </div>
 
     <script>
+        // منطق الشاشة الترحيبية
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 2500); // تظهر لمدة 2.5 ثانية
+        });
+
         // بيانات الأقسام المختلفة
         const modalData = {
             about: {
                 title: "نبذة عن المهندس سامح زكريا",
                 icon: "fa-brain",
                 content: `
-                    <p style="margin-bottom:12px;">أنا شغوف بمجال الكهربائية، التحكم الآلي، شبكات القوى الكهربائية، الميكاترونيكس، البرمجة، الروبوتات، والذكاء الاصطناعي.</p>
-                    <p style="margin-bottom:12px;">خريج <strong>معهد فني صناعي ببورسعيد</strong> (قسم شبكات قوى كهربائية).</p>
-                    <p>وسوف يستكمل دراسته الجامعية في إحدى الجامعات الحكومية في المجال الهندسي أو التكنولوجي قسم الميكاترونيكس.</p>
+                    <p style="text-align: right;">مهندس طموح متخصص في مجال الهندسة الكهربائية وشبكات القوى والتحكم الآلي والميكاترونيكس، يجمع بين المعرفة الأكاديمية الشغوفة والمهارات الميدانية والتطبيقية، ويسعى للتطوير المستمر في تقنيات الذكاء الاصطناعي والأتمتة.</p>
                 `
             },
             courses: {
@@ -530,7 +557,9 @@
                 icon: "fa-microchip",
                 content: `
                     <ul>
-                        <li>حاصل على كورس في المعهد البريطاني في الإسماعيلية في اللغة الإنجليزية والكمبيوتر.</li>
+                        <li>كورس اللغة الإنجليزية والكمبيوتر - المعهد البريطاني بالإسماعيلية.</li>
+                        <li>دورات متخصصة في التحكم الآلي والـ PLC.</li>
+                        <li>أساسيات البرمجة وتطوير البرمجيات والويب.</li>
                     </ul>
                 `
             },
@@ -538,7 +567,7 @@
                 title: "الخبرات العملية والشركات",
                 icon: "fa-bolt",
                 content: `
-                    <p style="text-align:center; padding: 10px; color: var(--cyber-cyan);">لم يعمل بشركات من قبل.</p>
+                    <p style="text-align: right;">التركيز الحالي على التطبيق العملي والميداني في مجالات شبكات القوى والتحكم الآلي، والجاهزية للانضمام للتدريبات الميدانية في الشركات والمصانع الكبرى.</p>
                 `
             },
             skills: {
@@ -546,9 +575,9 @@
                 icon: "fa-code-branch",
                 content: `
                     <ul>
-                        <li>مطور برامج ويب مبتدئ</li>
-                        <li>مبرمج مبتدئ</li>
-                        <li>مبتدئ في اللغة الإنجليزية</li>
+                        <li><strong>الهندسة والتحكم:</strong> شبكات القوى، التحكم الآلي، الميكاترونيكس.</li>
+                        <li><strong>البرمجة والتطوير:</strong> HTML/CSS/JS، البرمجة المبتدئة للويب، التعامل مع GitHub.</li>
+                        <li><strong>اللغات:</strong> اللغة العربية (الأم)، اللغة الإنجليزية (مستوى جيد جداً ومحادثة رواد).</li>
                     </ul>
                 `
             },
@@ -556,7 +585,7 @@
                 title: "السيرة الذاتية (CV)",
                 icon: "fa-file-code",
                 content: `
-                    <p style="text-align:center; padding: 10px; color: var(--text-sub);">لا يوجد بعد</p>
+                    <p style="text-align: center;">يمكنك طلب النسخة الكاملة والمحدثة من السيرة الذاتية بصيغة PDF مباشرة عبر التواصل الشخصي.</p>
                 `
             }
         };
