@@ -3,29 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diophantus | المهندس سامح زكريا</title>
-    <!-- استدعاء خطوط هندسية وأيقونات FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <title>Theophantos | المهندس سامح زكريا</title>
+    <!-- استدعاء خطوط هندسية وفخمة وأيقونات FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@700;900&family=Cinzel:wght@600;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* إضافة شاشة الترحيب */
+        /* إضافة شاشة الترحيب المعدلة */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #050b14;
+            background: #03070d;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             z-index: 99999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
-        .pre-logo { font-family: 'Orbitron', sans-serif; color: #fff; font-size: 28px; letter-spacing: 4px; margin-bottom: 10px; }
-        .pre-text { font-family: 'Cairo', sans-serif; color: #00f0ff; font-size: 14px; letter-spacing: 2px; }
+
+        /* كلمة THEOPHANTOS بخط راقي ومُركز */
+        .preloader-header {
+            font-family: 'Cinzel Decorative', 'Orbitron', serif;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 10px rgba(0, 240, 255, 0.8),
+                0 0 20px rgba(0, 240, 255, 0.5),
+                0 0 40px rgba(0, 240, 255, 0.3);
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #00f0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+
+        /* الإطار الهندسي الفخم وديناميكية الدخول الجانبي المفاجئ */
+        .quote-frame {
+            position: relative;
+            max-width: 480px;
+            width: 90%;
+            padding: 32px 26px;
+            background: rgba(10, 25, 47, 0.90);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.08);
+            text-align: center;
+            overflow: hidden;
+            
+            /* انيميشن الدخول الجانبي من اليمين */
+            animation: slideInRight 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards, pulseFrame 4s infinite alternate ease-in-out 0.7s;
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(120vw) skewX(-10deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translateX(-15px) skewX(2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) skewX(0deg);
+            }
+        }
+
+        @keyframes pulseFrame {
+            0% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.08); border-color: rgba(0, 240, 255, 0.4); }
+            100% { box-shadow: 0 0 45px rgba(0, 255, 136, 0.3), inset 0 0 25px rgba(0, 255, 136, 0.12); border-color: rgba(0, 255, 136, 0.6); }
+        }
+
+        /* زوايا هندسية ديكورية */
+        .quote-frame::before, .quote-frame::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-color: #00f0ff;
+            border-style: solid;
+        }
+        .quote-frame::before {
+            top: 6px;
+            right: 6px;
+            border-width: 2px 2px 0 0;
+        }
+        .quote-frame::after {
+            bottom: 6px;
+            left: 6px;
+            border-width: 0 0 2px 2px;
+        }
+
+        .quote-text {
+            font-family: 'Cinzel', serif;
+            font-size: 14.5px;
+            line-height: 1.8;
+            color: #f0f6fc;
+            letter-spacing: 0.5px;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-text span.highlight {
+            color: #00f0ff;
+            font-weight: 800;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+        }
+
+        /* مؤشر التحميل التقني (Loader Indicator) */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .cyber-spinner {
+            width: 42px;
+            height: 42px;
+            border: 3px solid rgba(0, 240, 255, 0.15);
+            border-top: 3px solid #00f0ff;
+            border-right: 3px solid #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: #00f0ff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+            animation: blinkText 1.5s infinite alternate;
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+
+        @keyframes blinkText {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .preloader-footer {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff88;
+            font-size: 15px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
+            margin-bottom: 10px;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 4px;
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
 
         :root {
             --bg-base: #050b14;
@@ -121,6 +276,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.4));
+            direction: ltr;
+            unicode-bidi: isolate;
         }
 
         .brand-logo::before, .brand-logo::after {
@@ -154,6 +311,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            direction: ltr;
+            unicode-bidi: isolate;
         }
 
         .profile-bio {
@@ -427,8 +586,21 @@
 
     <!-- الشاشة الترحيبية -->
     <div id="preloader">
-        <div class="pre-logo">DIOPHANTUS</div>
-        <div class="pre-text">جاري تحميل البيانات...</div>
+        <div class="preloader-header" dir="ltr">THEOPHANTOS</div>
+        
+        <div class="quote-frame">
+            <div class="quote-text" dir="ltr">
+                "The top isn't built for everyone, which is why we are here. Welcome to the stage where we don't compete—we <span class="highlight">decide</span> who stays and who fades away."
+            </div>
+        </div>
+
+        <!-- مؤشر التحميل الإلكتروني -->
+        <div class="loader-container">
+            <div class="cyber-spinner"></div>
+            <div class="loading-text" dir="ltr">[ LOADING SYSTEM DATA... ]</div>
+        </div>
+
+        <div class="preloader-footer" dir="ltr">ENG SAMEH ZAKARIA</div>
     </div>
 
     <div class="bg-grid"></div>
@@ -437,15 +609,15 @@
     <div class="container">
         
         <div class="profile-card">
-            <div class="brand-logo">Diophantus</div>
+            <div class="brand-logo" dir="ltr">Theophantos</div>
             <h1 class="profile-name">المهندس سامح زكريا</h1>
-            <div class="profile-title">
+            <div class="profile-title" dir="ltr">
                 <i class="fas fa-microchip"></i>
-                Electrical, Mechatronics & AI Automation
+                Electrical, Power Systems & AI Automation
                 <i class="fas fa-network-wired"></i>
             </div>
             <p class="profile-bio">
-                متخصص في هندسة الكهرباء، الشبكات الكهربية، أنظمة التحكم الآلي، والميكاترونيكس والبرمجة.
+                متخصص في هندسة الكهرباء، الشبكات الكهربية، أنظمة التحكم الآلي، والبرمجة.
             </p>
         </div>
 
@@ -511,7 +683,7 @@
         </div>
 
         <div class="footer-rights">
-            © DIOPHANTUS | جميع الحقوق محفوظة.<br>
+            © THEOPHANTOS | جميع الحقوق محفوظة.<br>
             <span class="developer-tag"><i class="fas fa-code"></i> مطور الموقع: المهندس سامح زكريا</span>
         </div>
 
@@ -537,10 +709,11 @@
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                }, 500);
-            }, 2500); // تظهر لمدة 2.5 ثانية
+                }, 800);
+            }, 6000);
         });
 
         // بيانات الأقسام المختلفة
@@ -549,7 +722,7 @@
                 title: "نبذة عن المهندس سامح زكريا",
                 icon: "fa-brain",
                 content: `
-                    <p style="text-align: right;">مهندس طموح متخصص في مجال الهندسة الكهربائية وشبكات القوى والتحكم الآلي والميكاترونيكس، يجمع بين المعرفة الأكاديمية الشغوفة والمهارات الميدانية والتطبيقية، ويسعى للتطوير المستمر في تقنيات الذكاء الاصطناعي والأتمتة.</p>
+                    <p style="text-align: right;">مهندس طموح وشغوف بالبرمجة والعلوم الهندسية في مجالات الكهرباء وشبكات القوى والتحكم الآلي، يجمع بين المعرفة الأكاديمية والشغف بالتطوير التقني، ويسعى دائماً للدمج بين المهارات البرمجية والتطبيق الميداني في مجالات الأتمتة والتقنيات الحديثة.</p>
                 `
             },
             courses: {
@@ -575,7 +748,7 @@
                 icon: "fa-code-branch",
                 content: `
                     <ul>
-                        <li><strong>الهندسة والتحكم:</strong> شبكات القوى، التحكم الآلي، الميكاترونيكس.</li>
+                        <li><strong>الهندسة والتحكم:</strong> شبكات القوى، التحكم الآلي، الأنظمة الكهربية.</li>
                         <li><strong>البرمجة والتطوير:</strong> HTML/CSS/JS، البرمجة المبتدئة للويب، التعامل مع GitHub.</li>
                         <li><strong>اللغات:</strong> اللغة العربية (الأم)، اللغة الإنجليزية (مستوى جيد جداً ومحادثة رواد).</li>
                     </ul>
@@ -585,7 +758,7 @@
                 title: "السيرة الذاتية (CV)",
                 icon: "fa-file-code",
                 content: `
-                    <p style="text-align: center;">يمكنك طلب النسخة الكاملة والمحدثة من السيرة الذاتية بصيغة PDF مباشرة عبر التواصل الشخصي.</p>
+                    <p style="text-align: center;">يمكنكطلب النسخة الكاملة والمحدثة من السيرة الذاتية بصيغة PDF مباشرة عبر التواصل الشخصي.</p>
                 `
             }
         };
